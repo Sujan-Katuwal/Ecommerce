@@ -1,0 +1,92 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block content %}
+
+  <body id="reportsPage">
+    
+    <div class="container mt-5">
+      <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-products">
+            <div class="tm-product-table-container">
+              <table class="table table-hover tm-table-small tm-product-table">
+                <thead>
+                  <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">PRODUCT NAME</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">IN STOCK</th>
+                    <th scope="col">DISCOUNT</th>
+                    <th scope="col">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in products %}
+                  <tr>
+                    <th scope="row"><input type="checkbox" /></th>
+                    <td class="tm-product-name">{{item.name}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.stock}}</td>
+                    <td>{{item.discount}}</td>
+                    <td>
+                      <a href="{% url 'delete_product' item.id %}" class="tm-product-delete-link">
+                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table container -->
+             <a
+              href="{% url 'admin_add_product' %}" 
+              class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
+            <button class="btn btn-primary btn-block text-uppercase">
+              Delete selected products
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+            <h2 class="tm-block-title">Product Categories</h2>
+            <div class="tm-product-table-container">
+              <table class="table tm-table-small tm-product-table">
+                {% for cate in categories %}
+                <tbody>
+                  <tr>
+                    <td class="tm-product-name">{{cate.name}}</td>
+                    <td class="text-center">
+                      <a href="{% url 'delete_category' cate.id %}" class="tm-product-delete-link">
+                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                      </a>
+                    </td>
+                  </tr> 
+                </tbody>
+                {% endfor %}
+              </table>
+            </div>
+            <!-- table container -->
+            <a
+            href="{% url 'admin_add_category' %}"
+            class="btn btn-primary btn-block text-uppercase mb-3">Add new Category</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <script src="{% static 'adminpanel/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'adminpanel/js/bootstrap.min.js' %}"></script>
+    <script>
+      $(function() {
+        $(".tm-product-name").on("click", function() {
+          window.location.href = "edit-product.html";
+        });
+      });
+    </script>
+  </body>
+</html>
+{% endblock content %}
