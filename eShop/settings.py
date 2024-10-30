@@ -40,9 +40,13 @@ INSTALLED_APPS = [
     'products',
     'contact',
     'adminPanel',
-    'accounts',
+    'account',
+    'cart',
 
 ]
+
+# Add your custom user model
+# AUTH_USER_MODEL = 'accounts.MyUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

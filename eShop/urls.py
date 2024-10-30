@@ -21,12 +21,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+     path('default_admin/', admin.site.urls), 
     path('', views.home, name ="home"),
     path('home/', views.home, name="home"),
     path('product/', include('products.urls')),
     path('contact/', include('contact.urls')),
-    # path('add_product/', include('add_product.urls')),
     path('admin/', include('adminPanel.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('account.urls')),
+    path('cart/', include('cart.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
